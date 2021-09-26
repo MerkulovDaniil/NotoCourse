@@ -1,0 +1,51 @@
+name: Deploy to Pages
+
+on: [workflow_dispatch]
+#  schedule:
+#    - cron: "*/20 * * * *"
+    
+jobs:
+  generate-restruct-update:
+    runs-on: ubuntu-latest
+    
+    steps:
+        # Download packages
+      - name: Submodule Update
+        run: |
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install ./google-chrome-stable_current_amd64.deb
+          sudo apt-get update
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Download loconotion
+        uses: actions/checkout@v2
+        with:
+          repository: 'leoncvlt/loconotion'
+      - name: Install loconotion
+        run: pip install -r requirements.txt
+      - name: Configuration File
+        run: |
+          cat >  ${GITHUB_WORKSPACE}/config.toml  << EOF
+          ${{ secrets.SITE_CONFIG }}
+          EOF
+      - name: Run loconotion
+        run: python loconotion ${GITHUB_WORKSPACE}/config.toml
+      - name: Copy structuring script
+        run: wget -O ${GITHUB_WORKSPACE}/dist/output/struct.py "https://gist.githubusercontent.com/MerkulovDaniil/f4f785450db53e412d6c61c8af9ca2b6/raw/6fed3666e340bf98162b5ce66da99e09842ac4c0/loconotion_struct.py"
+      - name: Clean structuring
+        run: |
+            cd ${GITHUB_WORKSPACE}/dist/output/
+            python struct.py
+      - name: List files in the repository
+        run: ls ${GITHUB_WORKSPACE}/dist/output
+      
+      - name: Deploy to Pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: main
+          FOLDER: dist/output
+          CLEAN: true
+          SINGLE_COMMIT: true
