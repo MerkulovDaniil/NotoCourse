@@ -48,4 +48,5 @@ jobs:
           BRANCH: main
           FOLDER: dist/output
           CLEAN: true
-          SINGLE_COMMIT: true
+          CLEAN-EXCLUDE: |
+            README.md
