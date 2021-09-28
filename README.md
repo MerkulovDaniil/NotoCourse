@@ -187,7 +187,7 @@ jobs:
           CLEAN: true
 ```
 
-If you are a PRO user (not like me), you can schedule running this action with cron every 30 minutes, but I prefer to do it manually after each big update of the notion site (it is eco-friendly). If you can't say
+If you are a PRO user (not like me), you can schedule running this action with cron every 30 minutes, but I prefer to do it manually after each big update of the notion site (it is eco-friendly).
 
 Now you can see the action if you go to Actions menu.
 
