@@ -48,5 +48,5 @@ jobs:
           BRANCH: main
           FOLDER: dist/output
           CLEAN: true
-          CLEAN-EXCLUDE: |
+          CLEAN_EXCLUDE: |
             README.md
