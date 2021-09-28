@@ -47,6 +47,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: main
           FOLDER: dist/output
-          CLEAN: true
           CLEAN_EXCLUDE: |
             README.md
