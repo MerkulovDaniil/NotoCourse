@@ -432,7 +432,7 @@ td, th {
     transition: 100ms ease-in
     }
 .notion-link:hover {
-    color: #eb5757 !important;
+    color: #2eaadc !important;
     /* Front red color. */
     }
 .notion-mobile-tapping {
@@ -725,6 +725,7 @@ input[type="number"].input-hide-arrows {
 /* ==================================================================== */
 /** Conditional style when self is contentEditable */
 /** Conditional style when a content-editable root is editable */
+/** Conditional style when an element is or is inside a focused contentEditable. */
 /*!*************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/client/css/react-datetime.css ***!
   \*************************************************************************************/
@@ -997,6 +998,25 @@ table > tr {
     }
 .front-fadein-fast {
     animation: fadein ease-in 150ms
+    }
+/*!*************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/client/css/hide-scrollbar.css ***!
+  \*************************************************************************************/
+/**
+ * Utility to hide scrollbars while retaining scroll functionality.
+ * This can't be done with React inline styles because of the
+ * ::-webkit-scrollbar pseudo-element selector.
+*/
+.hide-scrollbar {
+    /* Hide scrollbars in IE 10+. */
+    -ms-overflow-style: none;
+    /* Hide scrollbar in FF. */
+    scrollbar-width: none
+    }
+/* Hide scrollbar for Chrome/Safari/Webkit browsers. */
+.hide-scrollbar::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important
     }
 /*!****************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/client/css/prism.css ***!
